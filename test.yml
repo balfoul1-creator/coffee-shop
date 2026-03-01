@@ -1,0 +1,35 @@
+name: Test Coffee Shop
+
+# When to run
+on:
+  push:           # Every time code is pushed
+    branches: [ main ]
+  pull_request:   # Every time someone wants to merge
+    branches: [ main ]
+
+# What to do
+jobs:
+  test:
+    runs-on: ubuntu-latest  # Fresh Ubuntu machine
+    
+    steps:
+    - name: 📥 Download code
+      uses: actions/checkout@v3
+      
+    - name: 📦 Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+        
+    - name: 🔍 Run tests
+      run: |
+        echo "🤖 CI/CD Pipeline: Testing Coffee Shop..."
+        npm test
+        
+    - name: ✅ All tests passed
+      if: success()
+      run: echo "🎉 All tests passed! Ready to deploy!"
+      
+    - name: ❌ Tests failed
+      if: failure()
+      run: echo "😱 Tests failed! Developer needs to fix!"
