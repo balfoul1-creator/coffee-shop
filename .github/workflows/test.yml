@@ -1,0 +1,30 @@
+name: Test Coffee Shop
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: 📥 Download code
+      uses: actions/checkout@v3
+      
+    - name: 📦 Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+        
+    - name: 🔍 Run tests
+      run: |
+        echo "🤖 Testing Coffee Shop..."
+        npm install
+        npm test
+        
+    - name: ✅ Tests passed
+      if: success()
+      run: echo "🎉 All tests passed!"
