@@ -7,7 +7,7 @@ function calculateBill(coffeeType, quantity) {
   if (coffeeType === "espresso") {
     price = 3;
   } else if (coffeeType === "latte") {
-    price = 4;
+    price = 5;  // BUG!
   } else if (coffeeType === "cappuccino") {
     price = 4;
   } else if (coffeeType === "mocha") {
