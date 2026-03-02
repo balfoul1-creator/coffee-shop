@@ -9,6 +9,21 @@ function calculateBill(coffeeType, quantity) {
   return price * quantity;
 }
 
+// 🔴 THIS FUNCTION IS MISSING!
+function applyDiscount(total) {
+  if (total > 20) {
+    return total * 0.9;  // 10% off over $20
+  } else if (total > 10) {
+    return total * 0.95; // 5% off over $10
+  }
+  return total;
+}
+
+function isValidCoffee(type) {
+  const validTypes = ["espresso", "latte", "cappuccino", "mocha"];
+  return validTypes.includes(type);
+}
+
 const server = http.createServer((req, res) => {
   const menu = {
     espresso: 3,
@@ -26,4 +41,5 @@ server.listen(PORT, () => {
   console.log(`☕ Coffee Shop server running on port ${PORT}`);
 });
 
-module.exports = { calculateBill, applyDiscount };
+// ✅ EXPORT ALL functions!
+module.exports = { calculateBill, applyDiscount, isValidCoffee };
