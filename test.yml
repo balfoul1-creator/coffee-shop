@@ -1,8 +1,8 @@
-name: Build and Push Docker Image
+name: 🧪 TEST BRANCH - Build and Push Docker
 
 on:
   push:
-    branches: [ main ]
+    branches: [ test ]
 
 jobs:
   build-and-push:
@@ -31,11 +31,10 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
       
-      - name: 🏗️ Build and Push Docker image
+      - name: 🏗️ Build and Push
         uses: docker/build-push-action@v4
         with:
           context: .
           push: true
           tags: |
-            samadox/coffee-shop:latest
-            samadox/coffee-shop:${{ github.sha }}
+            ${{ secrets.DOCKER_USERNAME }}/coffee-shop:test
