@@ -2,7 +2,7 @@ name: 🧪 TEST BRANCH - Build and Push Docker
 
 on:
   push:
-    branches: [ test ]
+    branches: [ Test ]
 
 jobs:
   build-and-push:
