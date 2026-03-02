@@ -9,7 +9,6 @@ function calculateBill(coffeeType, quantity) {
   return price * quantity;
 }
 
-// 🔴 THIS FUNCTION IS MISSING!
 function applyDiscount(total) {
   if (total > 20) {
     return total * 0.9;  // 10% off over $20
@@ -30,16 +29,23 @@ const server = http.createServer((req, res) => {
     latte: 4,
     cappuccino: 4,
     mocha: 5,
-    message: "☕ Coffee Shop API"
+    message: "☕ Coffee Shop API - Ready to serve!",
+    endpoints: {
+      "/": "This menu",
+      "/order/:type/:quantity": "Place an order (coming soon)"
+    }
   };
   res.writeHead(200, { 'Content-Type': 'application/json' });
   res.end(JSON.stringify(menu, null, 2));
 });
 
-const PORT = 3000;
-server.listen(PORT, () => {
-  console.log(`☕ Coffee Shop server running on port ${PORT}`);
-});
+// ✅ FIXED: Server only starts when file is run directly
+if (require.main === module) {
+  const PORT = 3000;
+  server.listen(PORT, () => {
+    console.log(`☕ Coffee Shop server running on port ${PORT}`);
+    console.log(`📝 Try it: http://localhost:${PORT}`);
+  });
+}
 
-// ✅ EXPORT ALL functions!
 module.exports = { calculateBill, applyDiscount, isValidCoffee };
