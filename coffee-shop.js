@@ -1,46 +1,29 @@
-// COFFEE SHOP - FIXED VERSION!
+const http = require('http');
 
 function calculateBill(coffeeType, quantity) {
   let price = 0;
-  
-  // Set prices
-  if (coffeeType === "espresso") {
-   price = 3;
-  }else if (coffeeType === "latte") {
-    price = 4;  // BUG!.
-  } else if (coffeeType === "cappuccino") {
-    price = 4;
-  } else if (coffeeType === "mocha") {
-    price = 5;
-  }
-  
-  // ✅ FIXED: Multiply instead of add
-  let total = price * quantity;
-  
-  return total;
+  if (coffeeType === "espresso") price = 3;
+  else if (coffeeType === "latte") price = 4;
+  else if (coffeeType === "cappuccino") price = 4;
+  else if (coffeeType === "mocha") price = 5;
+  return price * quantity;
 }
 
-function applyDiscount(total) {
-  // ✅ FIXED: Correct discount logic
-  if (total > 20) {
-    return total * 0.9;  // 10% off over $20
-  } else if (total > 10) {
-    return total * 0.95; // 5% off over $10
-  }
-  return total;
-}
+const server = http.createServer((req, res) => {
+  const menu = {
+    espresso: 3,
+    latte: 4,
+    cappuccino: 4,
+    mocha: 5,
+    message: "☕ Coffee Shop API"
+  };
+  res.writeHead(200, { 'Content-Type': 'application/json' });
+  res.end(JSON.stringify(menu, null, 2));
+});
 
-function isValidCoffee(type) {
-  // ✅ FIXED: Include all coffee types
-  const validTypes = ["espresso", "latte", "cappuccino", "mocha"];
-  return validTypes.includes(type);
-}
+const PORT = 3000;
+server.listen(PORT, () => {
+  console.log(`☕ Coffee Shop server running on port ${PORT}`);
+});
 
-module.exports = { calculateBill, applyDiscount, isValidCoffee };
-
-// Run if called directly
-if (require.main === module) {
-  console.log("☕ COFFEE SHOP MENU:");
-  console.log("2 espressos: $" + calculateBill("espresso", 2));
-  console.log("3 lattes: $" + calculateBill("latte", 3));
-}
+module.exports = { calculateBill };
