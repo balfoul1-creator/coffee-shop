@@ -26,4 +26,4 @@ server.listen(PORT, () => {
   console.log(`☕ Coffee Shop server running on port ${PORT}`);
 });
 
-module.exports = { calculateBill };
+module.exports = { calculateBill, applyDiscount };
