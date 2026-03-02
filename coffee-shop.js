@@ -48,4 +48,4 @@ if (require.main === module) {
   });
 }
 
-module.exports = { calculateBill, applyDiscount, isValidCoffee };
+module.exports = { calculateBill, applyDiscount, isValidCoffee };// Testing Docker Hub token
