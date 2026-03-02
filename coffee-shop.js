@@ -1,3 +1,5 @@
+
+// Testing workflow integrating Docker
 const http = require('http');
 
 function calculateBill(coffeeType, quantity) {
