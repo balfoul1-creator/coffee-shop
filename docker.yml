@@ -1,8 +1,8 @@
-name: Test Branch Workflow
+name: Build and Push Docker Image
 
 on:
   push:
-    branches: [ Test ]  # ← Capital T for your branch
+    branches: [ main ]  # ← Now on main!
 
 jobs:
   build-and-push:
@@ -37,4 +37,5 @@ jobs:
           context: .
           push: true
           tags: |
-            ${{ secrets.DOCKER_USERNAME }}/coffee-shop:test
+            ${{ secrets.DOCKER_USERNAME }}/coffee-shop:latest
+            ${{ secrets.DOCKER_USERNAME }}/coffee-shop:${{ github.sha }}
