@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  # Our Coffee Shop App
+  app:
+    build: .
+    container_name: coffee-shop-app
+    ports:
+      - "3000:3000"
+    environment:
+      - DB_HOST=mongodb
+      - DB_USER=admin
+      - DB_PASS=password123
+    depends_on:
+      - mongodb
+    networks:
+      - coffee-network
+
+  # MongoDB Database
+  mongodb:
+    image: mongo:6
+    container_name: coffee-shop-db
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=password123
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - coffee-network
+
+# Persistent storage
+volumes:
+  mongodb_data:
+
+# Network for containers to talk
+networks:
+  coffee-network:
+    driver: bridge
